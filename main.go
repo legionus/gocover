@@ -7,7 +7,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"sort"
-	"strings"
 
 	"github.com/mgutz/ansi"
 	"github.com/spf13/pflag"
@@ -81,7 +80,7 @@ func isExists(filepath string) bool {
 func findSource(name string) (string, error) {
 	gopaths := os.Getenv("GOPATH")
 	if len(gopaths) > 0 {
-		arr := strings.Split(gopaths, ":")
+		arr := filepath.SplitList(gopaths)
 
 		for _, gopath := range arr {
 			fpath := filepath.Join(gopath, "src", name)
